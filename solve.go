@@ -11,7 +11,8 @@ const (
 
 // Supported Captcha Modes
 var (
-	supportedModes = []string{"HCaptchaTask", "HCaptchaTaskProxyLess", "FunCaptchaTaskProxyLess", "GeeTestTask", "GeeTestTaskProxyLess", "ReCaptchaV2Task", "ReCaptchaV2EnterpriseTask", "ReCaptchaV2TaskProxyLess", "ReCaptchaV2EnterpriseTaskProxyLess", "ReCaptchaV3Task", "ReCaptchaV3EnterpriseTask", "ReCaptchaV3TaskProxyLess", "ReCaptchaV3EnterpriseTaskProxyLess", "ReCaptchaV3M1TaskProxyLess", "MTCaptcha", "ImageToTextTask"}
+	supportedModes      = []string{"HCaptchaTask", "HCaptchaTaskProxyLess", "FunCaptchaTaskProxyLess", "GeeTestTask", "GeeTestTaskProxyLess", "ReCaptchaV2Task", "ReCaptchaV2EnterpriseTask", "ReCaptchaV2TaskProxyLess", "ReCaptchaV2EnterpriseTaskProxyLess", "ReCaptchaV3Task", "ReCaptchaV3EnterpriseTask", "ReCaptchaV3TaskProxyLess", "ReCaptchaV3EnterpriseTaskProxyLess", "ReCaptchaV3M1TaskProxyLess", "MTCaptcha"}
+	classificationModes = []string{"ImageToTextTask"}
 )
 
 // Solve solves a captcha using CapSolver
@@ -40,6 +41,10 @@ func (client CapsolverClient) Solve(captchaTask map[string]any, retry int, delay
 
 	var taskResult *CapsolverResponse
 	var taskResultErr error
+
+	if contains(classificationModes, normalizedTaskType) {
+		return task, nil
+	}
 
 	for i := 0; i < retry; i++ {
 
