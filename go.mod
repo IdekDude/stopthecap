@@ -1,3 +1,3 @@
-module github.com/infectrs/stopthecap
+module github.com/IdekDude/stopthecap
 
 go 1.21.5

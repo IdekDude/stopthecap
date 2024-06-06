@@ -18,9 +18,10 @@ Go Package to easily solve captchas using CapSolver
 - `ReCaptchaV3EnterpriseTaskProxyLess`
 - `ReCaptchaV3M1TaskProxyLess`
 - `MTCaptcha`
+- `ImageToTextTask`
 ## Installation
 
-`go get github.com/infectrs/stopthecap`
+`go get github.com/IdekDude/stopthecap`
 ## Usage
 
 ### Get Balance
@@ -31,7 +32,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/infectrs/stopthecap"
+	"github.com/IdekDude/stopthecap"
 )
 
 func main() {
@@ -61,7 +62,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/infectrs/stopthecap"
+	"github.com/IdekDude/stopthecap"
 )
 
 func main() {
