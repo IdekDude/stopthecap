@@ -41,24 +41,22 @@ func (client CapsolverClient) Solve(captchaTask map[string]any, retry int, delay
 	var taskResult *CapsolverResponse
 	var taskResultErr error
 
-	if task.Status != readyStatus {
-		for i := 0; i < retry; i++ {
+	for i := 0; i < retry; i++ {
 
-			time.Sleep(delay)
+		time.Sleep(delay)
 
-			taskResult, taskResultErr = client.getTaskResult(task.TaskId)
+		taskResult, taskResultErr = client.getTaskResult(task.TaskId)
 
-			if taskResultErr != nil {
-				return nil, taskResultError
-			}
+		if taskResultErr != nil {
+			return nil, taskResultError
+		}
 
-			if taskResult.ErrorID == 1 {
-				return nil, errorIdError
-			}
+		if taskResult.ErrorID == 1 {
+			return nil, errorIdError
+		}
 
-			if taskResult.Status == readyStatus {
-				break
-			}
+		if taskResult.Status == readyStatus {
+			break
 		}
 	}
 
