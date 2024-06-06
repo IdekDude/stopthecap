@@ -25,7 +25,7 @@ func (client CapsolverClient) Solve(captchaTask map[string]any, retry int, delay
 
 	normalizedTaskType := strings.ToLower(taskType)
 
-	if !contains(supportedModes, normalizedTaskType) {
+	if !contains(supportedModes, normalizedTaskType) || !contains(classificationModes, normalizedTaskType) {
 		return nil, notSupportedCaptchaTypeError
 	}
 
