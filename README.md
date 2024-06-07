@@ -82,7 +82,7 @@ func main() {
 		"captchaId":  "",
 	}
 
-	solvedCaptcha, err := captchaClient.Solve(captchaTask, captchaRetry, captchaTimeout)
+	solvedCaptcha, err := captchaClient.Solve(captchaTask, captchaRetry, captchaTimeout, false)
 
 	if err != nil {
 		fmt.Println(err)

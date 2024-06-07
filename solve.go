@@ -16,7 +16,7 @@ var (
 )
 
 // Solve solves a captcha using CapSolver
-func (client CapsolverClient) Solve(captchaTask map[string]any, retry int, delay time.Duration) (*CapsolverResponse, error) {
+func (client CapsolverClient) Solve(captchaTask map[string]any, retry int, delay time.Duration, classification bool) (*CapsolverResponse, error) {
 	taskType, exists := captchaTask["type"].(string)
 
 	if !exists {
@@ -25,8 +25,14 @@ func (client CapsolverClient) Solve(captchaTask map[string]any, retry int, delay
 
 	normalizedTaskType := strings.ToLower(taskType)
 
-	if !contains(supportedModes, normalizedTaskType) || !contains(classificationModes, normalizedTaskType) {
-		return nil, notSupportedCaptchaTypeError
+	if classification {
+		if !contains(classificationModes, normalizedTaskType) {
+			return nil, notSupportedCaptchaTypeError
+		}
+	} else {
+		if !contains(supportedModes, normalizedTaskType) {
+			return nil, notSupportedCaptchaTypeError
+		}
 	}
 
 	task, err := client.createTask(captchaTask)
@@ -42,26 +48,27 @@ func (client CapsolverClient) Solve(captchaTask map[string]any, retry int, delay
 	var taskResult *CapsolverResponse
 	var taskResultErr error
 
-	if contains(classificationModes, normalizedTaskType) {
-		return task, nil
-	}
-
-	for i := 0; i < retry; i++ {
-
-		time.Sleep(delay)
-
-		taskResult, taskResultErr = client.getTaskResult(task.TaskId)
-
-		if taskResultErr != nil {
-			return nil, taskResultError
+	if classification {
+		if contains(classificationModes, normalizedTaskType) {
+			return task, nil
 		}
+	} else {
+		for i := 0; i < retry; i++ {
+			time.Sleep(delay)
 
-		if taskResult.ErrorID == 1 {
-			return nil, errorIdError
-		}
+			taskResult, taskResultErr = client.getTaskResult(task.TaskId)
 
-		if taskResult.Status == readyStatus {
-			break
+			if taskResultErr != nil {
+				return nil, taskResultError
+			}
+
+			if taskResult.ErrorID == 1 {
+				return nil, errorIdError
+			}
+
+			if taskResult.Status == readyStatus {
+				break
+			}
 		}
 	}
 
