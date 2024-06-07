@@ -14,21 +14,21 @@ type CapsolverRequest struct {
 
 // CapsolverSolution holds the CapSolver solution data
 type CapsolverSolution struct {
-	UserAgent        string `json:"userAgent,omitempty"`
-	ExpireTime       string `json:"expireTime,omitempty"`
-	Timestamp        string `json:"timestamp,omitempty"`
-	CaptchaKey       string `json:"captchaKey,omitempty"`
-	CaptchaSolution  string `json:"gRecaptchaResponse,omitempty"`
-	CaptchaId        string `json:"captcha_id,omitempty"`
-	CaptchaOutput    string `json:"captcha_output,omitempty"`
-	CaptchaChallenge string `json:"challenge,omitempty"`
-	CaptchaValidate  string `json:"validate,omitempty"`
-	GenTime          string `json:"gen_time,omitempty"`
-	LotNumber        string `json:"lot_number,omitempty"`
-	PassToken        string `json:"pass_token,omitempty"`
-	RiskType         string `json:"risk_type,omitempty"`
-	Text             string `json:"text,omitempty"`
-	Confidence       string `json:"confidence,omitempty"`
+	UserAgent        string  `json:"userAgent,omitempty"`
+	ExpireTime       string  `json:"expireTime,omitempty"`
+	Timestamp        string  `json:"timestamp,omitempty"`
+	CaptchaKey       string  `json:"captchaKey,omitempty"`
+	CaptchaSolution  string  `json:"gRecaptchaResponse,omitempty"`
+	CaptchaId        string  `json:"captcha_id,omitempty"`
+	CaptchaOutput    string  `json:"captcha_output,omitempty"`
+	CaptchaChallenge string  `json:"challenge,omitempty"`
+	CaptchaValidate  string  `json:"validate,omitempty"`
+	GenTime          string  `json:"gen_time,omitempty"`
+	LotNumber        string  `json:"lot_number,omitempty"`
+	PassToken        string  `json:"pass_token,omitempty"`
+	RiskType         string  `json:"risk_type,omitempty"`
+	Text             string  `json:"text,omitempty"`
+	Confidence       float64 `json:"confidence,omitempty"`
 }
 
 // CapsolverResponse holds the CapSolver response body data
