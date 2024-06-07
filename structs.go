@@ -27,6 +27,8 @@ type CapsolverSolution struct {
 	LotNumber        string `json:"lot_number,omitempty"`
 	PassToken        string `json:"pass_token,omitempty"`
 	RiskType         string `json:"risk_type,omitempty"`
+	Text             string `json:"text,omitempty"`
+	Confidence       string `json:"confidence,omitempty"`
 }
 
 // CapsolverResponse holds the CapSolver response body data
